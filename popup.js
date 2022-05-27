@@ -1,17 +1,19 @@
 // Initialize button with user's preferred color
-let changeColor = document.getElementById("changeColor");
+let submitButton = document.getElementById("submit_button");
 
-chrome.storage.sync.get("color", ({ color }) => {
-  changeColor.style.backgroundColor = color;
-});
+// chrome.storage.sync.get("color", ({ color }) => {
+//   changeColor.style.backgroundColor = color;
+// });
 
 // When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener("click", async () => {
+submitButton.addEventListener("click", async (e) => {
+    e.preventDefault()
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
+    let url = document.getElementById("script").value
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: setPageBackgroundColor,
+      function: loadScript,
+      args: [url]
     });
   });
   
@@ -22,3 +24,17 @@ changeColor.addEventListener("click", async () => {
       document.body.style.backgroundColor = color;
     });
   }
+
+  // This function will load the script in the current page
+    function loadScript(url) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = url;
+        script.id = "selfbook_jssdk"
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.appendChild(script);
+        console.log(script)
+      });
+    }
