@@ -35,6 +35,6 @@ submitButton.addEventListener("click", async (e) => {
         script.onload = resolve;
         script.onerror = reject;
         document.body.appendChild(script);
-        console.log(script)
+        console.log(script, "has been added to this page")
       });
     }
