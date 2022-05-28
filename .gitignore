@@ -1,3 +1,6 @@
+# Hide SDK File
+sdk.min.js
+
 # Logs
 logs
 *.log

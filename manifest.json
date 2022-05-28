@@ -30,9 +30,18 @@
     },
     "options_page": "options.html",
     "content_security_policy": {
-        "script-src": "'self' https://sdk.selfbook.com",
-        "object-src": "self"
+        "extension_pages": "script-src 'self'; object-src 'self'",
+        "sandbox": "sandbox allow-scripts; script-src 'self' 'https://sdk.selfbook.com/'; object-src 'self'"
+    },
+    
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "sdk.min.js"
+            ],
+            "matches": [
+                "https://*/*"
+            ]
+        }
+    ]
     }
-
-}
-
