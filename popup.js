@@ -10,7 +10,13 @@ submitButton.addEventListener("click", async (e) => {
     let hotelId = document.getElementById("hotelId").value
     let apiKey = document.getElementById("apiKey").value
     let sdkPath = chrome.runtime.getURL('/sdk.min.js')
-    console.log(hotelId, apiKey)
+      let url = new URL(tab.url)
+      let domain = url.hostname
+
+    console.log(hotelId, apiKey, domain)
+    chrome.storage.sync.set({hotelId: hotelId, apiKey: apiKey, url: domain }, function() {
+      console.log('Value is set to ' + hotelId + ' and ' + apiKey + ' and ' + domain);
+    })
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: loadScript,
