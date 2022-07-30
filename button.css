@@ -12,7 +12,6 @@ button {
   }
 
   .btn {
-    background-color: green;
     color: white;
     border: none;
     text-align: center;
@@ -22,4 +21,12 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     padding: 5px 10px;
+  }
+
+  .red {
+    background-color: #ff0000;
+  }
+
+  .green {
+    background-color: green;
   }
